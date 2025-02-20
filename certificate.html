@@ -84,7 +84,9 @@
             const certificate = document.querySelector('.certificate-content');
             const canvas = await html2canvas(certificate, {
                 scale: 2,
-                backgroundColor: null
+                backgroundColor: "#1a1a1a",
+                useCORS: true,
+                logging: true
             });
 
             const link = document.createElement('a');

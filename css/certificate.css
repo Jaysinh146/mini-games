@@ -77,10 +77,10 @@
 }
 
 .certificate {
-    background: var(--white);
+    background: #1a1a1a;  /* Dark background */
     padding: 3rem;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     position: relative;
 }
 
@@ -88,7 +88,8 @@
     border: 10px solid var(--primary-orange);
     padding: 2rem;
     text-align: center;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
+    background: #1a1a1a;  /* Dark background */
+    color: #808080;  /* Light grey for regular text */
 }
 
 .certificate-header h1 {
@@ -99,7 +100,7 @@
 
 .subtitle {
     font-size: 1.2rem;
-    color: var(--dark-text);
+    color: #808080;  /* Light grey */
     margin-bottom: 1rem;
 }
 
@@ -114,6 +115,7 @@
 
 .certificate-text {
     margin: 2rem 0;
+    color: #808080;  /* Light grey */
 }
 
 .certificate-text h2 {
@@ -129,7 +131,7 @@
 
 .certificate-text li {
     margin: 0.5rem 0;
-    color: var(--dark-text);
+    color: #808080;  /* Light grey */
 }
 
 .certificate-footer {
@@ -137,6 +139,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    color: #808080;  /* Light grey */
 }
 
 .signature {
@@ -166,7 +169,7 @@
 
 .signature-title {
     font-size: 0.9rem;
-    color: var(--dark-text);
+    color: #808080;  /* Light grey */
     opacity: 0.8;
 }
 
@@ -311,5 +314,14 @@
 
     .signature-line {
         width: 120px;
+    }
+}
+
+/* Update the download preview background color */
+@media print {
+    .certificate-content {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background: #1a1a1a !important;
     }
 } 
