@@ -1,0 +1,12 @@
+mini-games-website/
+├── index.html
+├── css/
+│   ├── style.css
+│   └── games.css
+├── js/
+│   ├── main.js
+│   └── progress.js
+└── games/
+    ├── game1.html
+    ├── game2.html
+    └── ... 

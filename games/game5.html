@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Are You the Main Character? 🌟</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>🌟 Are You the Main Character?</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Let's calculate your main character energy!</p>
+            <button id="generateButton" class="play-button">Calculate My Energy! ✨</button>
+            <div id="result" class="result-container hidden">
+                <h2 class="result-text"></h2>
+                <p class="result-description"></p>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        const results = [
+            {
+                percentage: "100%",
+                description: "You're definitely the main character! Birds help you get dressed in the morning and your hair looks perfect even in a hurricane."
+            },
+            {
+                percentage: "85%",
+                description: "Strong main character vibes! You've got a tragic backstory and probably a special birthmark that means something."
+            },
+            {
+                percentage: "65%",
+                description: "You're the quirky best friend who steals every scene they're in. The real star, if we're honest!"
+            },
+            {
+                percentage: "45%",
+                description: "You're the mysterious side character with a potential spin-off series. Not bad at all!"
+            },
+            {
+                percentage: "25%",
+                description: "You're more like background character with surprisingly good character development."
+            },
+            {
+                percentage: "5%",
+                description: "You're basically a tree in the background... but like, a really nice tree that people notice!"
+            }
+        ];
+
+        generateButton.addEventListener('click', () => {
+            const result = results[Math.floor(Math.random() * results.length)];
+            
+            resultText.textContent = `Main Character Energy: ${result.percentage}`;
+            resultDescription.textContent = result.description;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `🌟 ${resultText.textContent} - ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Main Character Energy',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(5);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 

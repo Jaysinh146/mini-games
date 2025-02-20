@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Crime Would You Get Arrested For? 🚔</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>🚔 What Crime Would You Get Arrested For?</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Discover your totally hypothetical criminal destiny!</p>
+            <button id="generateButton" class="play-button">Reveal My Crime! 👮</button>
+            <div id="result" class="result-container hidden">
+                <h2 class="result-text"></h2>
+                <p class="result-description"></p>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        const crimes = [
+            {
+                crime: "Illegal Vibing",
+                description: "Arrested for vibing too hard in a no-vibe zone. Your defense: 'The beat was irresistible, your honor!'"
+            },
+            {
+                crime: "Excessive Pun Usage",
+                description: "You were caught making too many puns in public. The judge couldn't handle your 'punishing' behavior."
+            },
+            {
+                crime: "Meme Theft",
+                description: "Caught downloading memes without a proper meme license. The evidence? Your massive folder of rare Pepes."
+            },
+            {
+                crime: "Pizza Crime",
+                description: "Arrested for putting pineapple on pizza in Italy. The Italian police were not amused by your 'creative' toppings."
+            },
+            {
+                crime: "Dance Move Violation",
+                description: "Caught doing the Macarena at a formal event. Your moves were deemed 'too powerful' for public safety."
+            },
+            {
+                crime: "WiFi Piracy",
+                description: "Busted for naming your WiFi network 'FBI Surveillance Van #3'. They didn't appreciate the impersonation."
+            }
+        ];
+
+        generateButton.addEventListener('click', () => {
+            const crime = crimes[Math.floor(Math.random() * crimes.length)];
+            
+            resultText.textContent = crime.crime;
+            resultDescription.textContent = crime.description;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `🚔 I would get arrested for ${resultText.textContent} - ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Criminal Destiny',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(7);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 

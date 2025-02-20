@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congratulations! 🎉</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/certificate.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="certificate-container">
+        <div id="certificateForm" class="name-form">
+            <h2>🎉 Congratulations on completing all games! 🎉</h2>
+            <p>Enter your name to generate your certificate:</p>
+            <input type="text" id="nameInput" placeholder="Your name" class="name-input">
+            <button onclick="generateCertificate()" class="generate-button">Generate Certificate! 🏆</button>
+        </div>
+
+        <div id="certificate" class="certificate hidden">
+            <div class="certificate-content">
+                <div class="certificate-header">
+                    <h1>Certificate of Achievement</h1>
+                    <p class="subtitle">This is to certify that</p>
+                </div>
+                
+                <div class="recipient-name">
+                    <span id="recipientName">Name</span>
+                </div>
+
+                <div class="certificate-text">
+                    <p>has successfully completed all 8 mini-games in the ✨</p>
+                    <h2>Epic Mini-Games Collection 🎮</h2>
+                    <p>demonstrating exceptional skills in:</p>
+                    <ul>
+                        <li>Surviving hypothetical zombie apocalypses 🧟</li>
+                        <li>Handling embarrassing moments with grace 😭</li>
+                        <li>Managing complex situationships 🤔</li>
+                        <li>And other vital life skills! ⭐</li>
+                    </ul>
+                </div>
+
+                <div class="certificate-footer">
+                    <div class="date">
+                        <p>Awarded on <span id="currentDate">Date</span> 📅</p>
+                    </div>
+                    <div class="signature">
+                        <div class="signature-text">Jaysinh Patankar</div>
+                        <p>Jaysinh Patankar 🚀</p>
+                        <p class="signature-title">Creator & Developer ⚡</p>
+                    </div>
+                </div>
+            </div>
+            <div class="certificate-actions">
+                <button onclick="downloadCertificate()" class="download-button">Download Certificate 📄</button>
+                <button onclick="shareCertificate()" class="share-button">Share Achievement 🌟</button>
+                <a href="index.html" class="back-button">Back to Games 🎮</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="congratsModal" class="modal hidden">
+        <div class="modal-content">
+            <img src="IMG_0184.jpg" alt="Jaysinh Patankar" class="creator-photo">
+            <h2>🎉 Thanks for Playing! 🎉</h2>
+            <p>Hope you had fun with these silly games!</p>
+            <p>- Jaysinh 🚀</p>
+            <button onclick="closeModal()" class="modal-close">Close ✨</button>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function generateCertificate() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) {
+                alert('Please enter your name!');
+                return;
+            }
+
+            document.getElementById('recipientName').textContent = name;
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+            
+            document.getElementById('certificateForm').classList.add('hidden');
+            document.getElementById('certificate').classList.remove('hidden');
+        }
+
+        async function downloadCertificate() {
+            const certificate = document.querySelector('.certificate-content');
+            const canvas = await html2canvas(certificate, {
+                scale: 2,
+                backgroundColor: null
+            });
+
+            const link = document.createElement('a');
+            link.download = 'mini-games-certificate.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            showCongratsModal();
+        }
+
+        function shareCertificate() {
+            const name = document.getElementById('recipientName').textContent;
+            const text = `🎉 I just completed all mini-games and earned my certificate! Check out the Epic Mini-Games Collection!`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mini-Games Certificate',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function showCongratsModal() {
+            document.getElementById('congratsModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('congratsModal').classList.add('hidden');
+        }
+
+        document.querySelector('.back-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            showCongratsModal();
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 3000);
+        });
+    </script>
+</body>
+</html> 

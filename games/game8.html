@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your FBI Agent's Notes About You 👀</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .note-paper {
+            background: #fff9c4;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px;
+        }
+        
+        .note-header {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>👀 Your FBI Agent's Notes About You</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Let's see what your FBI agent has been writing about you...</p>
+            <button id="generateButton" class="play-button">View Secret File 📝</button>
+            <div id="result" class="result-container hidden">
+                <div class="note-paper">
+                    <div class="note-header">
+                        TOP SECRET - FBI SURVEILLANCE NOTES
+                        <br>
+                        Date: <span id="currentDate"></span>
+                    </div>
+                    <h2 class="result-text"></h2>
+                    <p class="result-description"></p>
+                </div>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        const notes = [
+            {
+                title: "Suspicious Search History",
+                description: "Subject spent 3 hours googling 'Is water wet?' and 'Why do dogs wear shoes but cats don't?' Possibly a philosopher or just really sleep deprived."
+            },
+            {
+                title: "Unusual Behavior Pattern",
+                description: "Subject talks to their plants and apologizes to furniture when bumping into it. Possibly Canadian or extremely polite."
+            },
+            {
+                title: "Concerning Food Habits",
+                description: "Subject puts cereal in AFTER milk. Recommend immediate psychological evaluation."
+            },
+            {
+                title: "Social Media Activity",
+                description: "Subject likes their own Instagram posts. Self-confidence levels: concerning."
+            },
+            {
+                title: "Daily Routine",
+                description: "Subject rehearses imaginary arguments in the shower and always wins. Undefeated champion in hypothetical debates."
+            },
+            {
+                title: "Entertainment Choices",
+                description: "Subject rewatches the same show for the 47th time instead of starting a new one. Claims 'I might notice something new this time.'"
+            }
+        ];
+
+        generateButton.addEventListener('click', () => {
+            const note = notes[Math.floor(Math.random() * notes.length)];
+            const date = new Date().toLocaleDateString();
+            document.getElementById('currentDate').textContent = date;
+            
+            resultText.textContent = `Subject Analysis: ${note.title}`;
+            resultDescription.textContent = note.description;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `👀 My FBI agent's notes: ${resultText.textContent} - ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My FBI Agent Notes',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(8);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 

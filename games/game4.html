@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which NPC Are You? 🎮</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>🎮 Which NPC Are You?</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Discover your true NPC identity in the game of life!</p>
+            <button id="generateButton" class="play-button">Reveal My NPC Type! 🎮</button>
+            <div id="result" class="result-container hidden">
+                <h2 class="result-text"></h2>
+                <p class="result-description"></p>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        const npcTypes = [
+            {
+                type: "The Tutorial Guide",
+                description: "You love explaining things that are completely obvious. 'Press W to walk forward' is your catchphrase."
+            },
+            {
+                type: "The Shopkeeper",
+                description: "You've got wares if they've got coin! Also known to say 'Welcome!' 47 times when someone walks by."
+            },
+            {
+                type: "The Side Quest Giver",
+                description: "Your life mission is asking strangers to collect 10 specific items that are slightly different from the regular ones."
+            },
+            {
+                type: "The Background Villager",
+                description: "You walk into walls occasionally and have exactly three dialogue lines about the weather."
+            },
+            {
+                type: "The Mysterious Wanderer",
+                description: "You stand in dark corners and say cryptic things like 'The moon whispers secrets to those who listen...'"
+            },
+            {
+                type: "The Guard",
+                description: "You took an arrow to the knee and now you just tell everyone about it. Security is your passion!"
+            }
+        ];
+
+        generateButton.addEventListener('click', () => {
+            const npc = npcTypes[Math.floor(Math.random() * npcTypes.length)];
+            
+            resultText.textContent = npc.type;
+            resultDescription.textContent = npc.description;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `🎮 I'm ${resultText.textContent} - ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My NPC Type',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(4);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 

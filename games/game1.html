@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Many Days Until Your Next Situationship? 🤔</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>🤔 How Many Days Until Your Next Situationship?</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Ready to find out when your next situationship begins? Click the button below!</p>
+            <button id="generateButton" class="play-button">Generate Prediction! 🎲</button>
+            <div id="result" class="result-container hidden">
+                <h2 class="result-text"></h2>
+                <p class="result-description"></p>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        generateButton.addEventListener('click', () => {
+            // Generate random number of days (1-365)
+            const days = Math.floor(Math.random() * 365) + 1;
+            
+            // Generate funny description
+            const descriptions = [
+                "Better start practicing your 'it's complicated' speech!",
+                "The stars have aligned... kind of.",
+                "Time to update your dating app profiles!",
+                "Your heart's about to do some cardio!"
+            ];
+            
+            const randomDescription = descriptions[Math.floor(Math.random() * descriptions.length)];
+            
+            // Show results
+            resultText.textContent = `${days} days!`;
+            resultDescription.textContent = randomDescription;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `🤔 My next situationship starts in ${resultText.textContent}! ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Situationship Prediction',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(1);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 

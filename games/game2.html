@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny Roast Generator 🔥</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>🔥 Funny Roast Generator</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Enter your name and get ready for a friendly roast!</p>
+            <input type="text" id="nameInput" placeholder="Your name" class="name-input">
+            <button id="generateButton" class="play-button">Generate Roast! 🔥</button>
+            <div id="result" class="result-container hidden">
+                <h2 class="result-text"></h2>
+                <p class="result-description"></p>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const nameInput = document.getElementById('nameInput');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        const roasts = [
+            "name, you're so basic, water feels spicy to you!",
+            "name looks like they apologize to furniture when bumping into it.",
+            "name's idea of living dangerously is eating expired yogurt.",
+            "name probably thinks HTML is a type of sandwich.",
+            "name's so indecisive, they struggle to pick a flavor at a vanilla ice cream shop!",
+            "name's spirit animal is a sloth having an existential crisis.",
+            "name's so careful with money, they reuse birthday candles!",
+            "name's dance moves look like a PowerPoint presentation glitching."
+        ];
+
+        generateButton.addEventListener('click', () => {
+            if (!nameInput.value) {
+                alert("Please enter your name first!");
+                return;
+            }
+
+            const randomRoast = roasts[Math.floor(Math.random() * roasts.length)];
+            const personalizedRoast = randomRoast.replace(/name/g, nameInput.value);
+            
+            resultText.textContent = "Your Roast:";
+            resultDescription.textContent = personalizedRoast;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+            nameInput.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `🔥 I got roasted: ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Funny Roast',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(2);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 

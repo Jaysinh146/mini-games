@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Would You Survive a Zombie Apocalypse? 🧟</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>🧟 Would You Survive a Zombie Apocalypse?</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Click to find out your chances of survival in the zombie apocalypse!</p>
+            <button id="generateButton" class="play-button">Check My Survival! 🧟</button>
+            <div id="result" class="result-container hidden">
+                <h2 class="result-text"></h2>
+                <p class="result-description"></p>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        const outcomes = [
+            {
+                survival: "100%",
+                description: "You're basically the main character in every zombie movie! Your secret weapon? You run Naruto-style and the zombies can't handle your weeb energy."
+            },
+            {
+                survival: "75%",
+                description: "Pretty good chances! Your strategy of hiding in a Costco and living off free samples is surprisingly solid."
+            },
+            {
+                survival: "50%",
+                description: "You might make it... Your plan to befriend the zombies through interpretive dance is unique, we'll give you that!"
+            },
+            {
+                survival: "25%",
+                description: "Not looking great... Maybe screaming 'YOLO' and charging at zombies with a pool noodle isn't the best strategy."
+            },
+            {
+                survival: "0%",
+                description: "You're definitely zombie food! Your plan to survive by pretending to be a mannequin in a store window needs some work."
+            }
+        ];
+
+        generateButton.addEventListener('click', () => {
+            const outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+            
+            resultText.textContent = `Survival Chance: ${outcome.survival}`;
+            resultDescription.textContent = outcome.description;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `🧟 ${resultText.textContent} - ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Zombie Apocalypse Survival Chances',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(3);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 

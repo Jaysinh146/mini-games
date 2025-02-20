@@ -1,0 +1,183 @@
+:root {
+    --primary-yellow: #FFD700;
+    --primary-orange: #FF8C00;
+    --secondary-orange: #FFA500;
+    --white: #FFFFFF;
+    --dark-text: #333333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka', sans-serif;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-orange));
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+h1 {
+    color: var(--white);
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 3px;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.progress-fill {
+    background: var(--white);
+    height: 20px;
+    border-radius: 20px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--dark-text);
+    font-weight: 600;
+    z-index: 1;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.game-card {
+    background: var(--white);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-card h2 {
+    color: var(--primary-orange);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.game-card p {
+    color: var(--dark-text);
+    margin-bottom: 1.5rem;
+}
+
+.play-button {
+    background: var(--primary-orange);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.play-button:hover {
+    background: var(--secondary-orange);
+}
+
+.completion-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.game-card.completed .completion-badge {
+    opacity: 1;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 1rem;
+    color: var(--white);
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        padding: 0 1rem;
+    }
+
+    .progress-bar {
+        width: 90%;
+        margin: 1rem auto;
+    }
+
+    .game-card {
+        margin: 0 0.5rem;
+    }
+
+    .game-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .game-card p {
+        font-size: 0.9rem;
+    }
+
+    .play-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .progress-text {
+        font-size: 0.9rem;
+    }
+
+    .games-grid {
+        gap: 1rem;
+    }
+} 

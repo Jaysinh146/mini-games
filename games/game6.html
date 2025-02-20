@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Next Embarrassing Moment 😭</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/games.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-button">← Back to Games</a>
+        <h1>😭 Your Next Embarrassing Moment</h1>
+    </header>
+
+    <main class="game-container">
+        <div class="game-content">
+            <p class="game-description">Brace yourself for your next awkward situation!</p>
+            <button id="generateButton" class="play-button">Predict My Shame! 🔮</button>
+            <div id="result" class="result-container hidden">
+                <h2 class="result-text"></h2>
+                <p class="result-description"></p>
+                <div class="share-buttons">
+                    <button class="share-button" onclick="shareResult()">Share Result 📱</button>
+                    <button class="complete-button" onclick="markComplete()">Mark Complete ✅</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        const generateButton = document.getElementById('generateButton');
+        const resultContainer = document.getElementById('result');
+        const resultText = document.querySelector('.result-text');
+        const resultDescription = document.querySelector('.result-description');
+
+        const moments = [
+            {
+                title: "The Classic Mix-up",
+                description: "You'll wave back at someone who was actually waving to the person behind you. Bonus points: you'll do it twice in a row!"
+            },
+            {
+                title: "The Public Performance",
+                description: "Your phone will start playing that embarrassing song from your playlist at full volume in a dead-quiet library."
+            },
+            {
+                title: "The Social Media Mishap",
+                description: "You'll accidentally like your ex's Instagram post from 3 years ago at 2 AM."
+            },
+            {
+                title: "The Fashion Disaster",
+                description: "You'll walk around all day with your pants unzipped, and everyone will be too polite to tell you."
+            },
+            {
+                title: "The Meeting Mayhem",
+                description: "You'll forget to mute yourself during a video call and everyone will hear you singing the SpongeBob theme song."
+            },
+            {
+                title: "The Restaurant Incident",
+                description: "You'll say 'You too!' when the waiter says 'Enjoy your meal!' Then think about it for the next 5 years."
+            }
+        ];
+
+        generateButton.addEventListener('click', () => {
+            const moment = moments[Math.floor(Math.random() * moments.length)];
+            
+            resultText.textContent = moment.title;
+            resultDescription.textContent = moment.description;
+            resultContainer.classList.remove('hidden');
+            generateButton.style.display = 'none';
+        });
+
+        function shareResult() {
+            const text = `😭 My next embarrassing moment: ${resultText.textContent} - ${resultDescription.textContent}`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My Future Embarrassing Moment',
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert('Copy this to share:\n\n' + text);
+            }
+        }
+
+        function markComplete() {
+            gameProgress.markGameComplete(6);
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html> 
