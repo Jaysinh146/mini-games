@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="certificate-container">
@@ -48,7 +48,9 @@
                         <p>Awarded on <span id="currentDate">Date</span> 📅</p>
                     </div>
                     <div class="signature">
-                        <div class="signature-text">Jaysinh Patankar</div>
+                        <div class="signature-line">
+                            <span class="signature-text">Jaysinh Patankar</span>
+                        </div>
                         <p>Jaysinh Patankar 🚀</p>
                         <p class="signature-title">Creator & Developer ⚡</p>
                     </div>
@@ -59,16 +61,6 @@
                 <button onclick="shareCertificate()" class="share-button">Share Achievement 🌟</button>
                 <a href="index.html" class="back-button">Back to Games 🎮</a>
             </div>
-        </div>
-    </div>
-
-    <div id="congratsModal" class="modal hidden">
-        <div class="modal-content">
-            <img src="IMG_0184.jpg" alt="Jaysinh Patankar" class="creator-photo">
-            <h2>🎉 Thanks for Playing! 🎉</h2>
-            <p>Hope you had fun with these silly games!</p>
-            <p>- Jaysinh 🚀</p>
-            <button onclick="closeModal()" class="modal-close">Close ✨</button>
         </div>
     </div>
 
@@ -99,7 +91,6 @@
             link.download = 'mini-games-certificate.png';
             link.href = canvas.toDataURL();
             link.click();
-            showCongratsModal();
         }
 
         function shareCertificate() {
@@ -116,26 +107,6 @@
                 alert('Copy this to share:\n\n' + text);
             }
         }
-
-        function showCongratsModal() {
-            document.getElementById('congratsModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('congratsModal').classList.add('hidden');
-            window.location.href = 'index.html';
-        }
-
-        document.querySelector('.back-button').addEventListener('click', function(e) {
-            e.preventDefault();
-            showCongratsModal();
-        });
-
-        document.querySelector('.share-button').addEventListener('click', function(e) {
-            setTimeout(() => {
-                showCongratsModal();
-            }, 1000);
-        });
     </script>
 </body>
 </html> 
