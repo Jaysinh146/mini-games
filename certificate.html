@@ -123,14 +123,18 @@
 
         function closeModal() {
             document.getElementById('congratsModal').classList.add('hidden');
+            window.location.href = 'index.html';
         }
 
         document.querySelector('.back-button').addEventListener('click', function(e) {
             e.preventDefault();
             showCongratsModal();
+        });
+
+        document.querySelector('.share-button').addEventListener('click', function(e) {
             setTimeout(() => {
-                window.location.href = this.href;
-            }, 3000);
+                showCongratsModal();
+            }, 1000);
         });
     </script>
 </body>
